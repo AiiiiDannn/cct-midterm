@@ -26,10 +26,14 @@ The core idea behind CCT is that the more someone knows about the cultural conse
   - $D_i$: competence of informant $i$, probability of giving correct answer  
   - $Z_j$: consensus answer (latent ground truth) for item $j$  
   - $X_{ij}$: binary response by informant $i$ to item $j$  
-- The response probability is defined as:  
-  \[  
-  p_{ij} = Z_j \cdot D_i + (1 - Z_j)(1 - D_i)  
-  \]  
+- The response probability is defined as: 
+
+<div align="center">
+
+$p_{ij} = Z_j \cdot D_i + (1 - Z_j)(1 - D_i)$
+
+</div>
+
 - Model components:  
   - $D_i \sim \text{Uniform}(0.5, 1)$    
   - $Z_j \sim \text{Bernoulli}(0.5)$    
