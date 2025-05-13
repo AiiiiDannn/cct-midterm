@@ -4,8 +4,8 @@
 
 This project implements a basic **Cultural Consensus Theory (CCT)** model using PyMC to analyze a small, simulated dataset about local plant knowledge. The goal is to estimate:
 
-- The **consensus answer** ( \( Z_j \) ) for each question    
-- The **knowledge competence** ( \( D_j \) ) of each informant
+- The **consensus answer** ( $Z_j$ ) for each question    
+- The **knowledge competence** ( $D_j$ ) of each informant
 
 The core idea behind CCT is that the more someone knows about the cultural consensus, the more their answers will agree with others — and especially with other knowledgeable informants.
 
@@ -17,33 +17,33 @@ The core idea behind CCT is that the more someone knows about the cultural conse
 
 - The function `load_plant_data()` loads data from `plant_knowledge.csv`  
 - The first column ("Informant ID") is dropped  
-- A NumPy matrix \( X_{ij} \in \{0,1\}^{N \times M} \) is returned  
+- A NumPy matrix $X_{ij} \in \{0,1\}^{N \times M}$ is returned  
 - The file path is resolved relative to the script location for portability
 
 ### Model Definition
 
 - Definitions:  
-  - \( D_i \): competence of informant \( i \), probability of giving correct answer  
-  - \( Z_j \): consensus answer (latent ground truth) for item \( j \)  
-  - \( X_{ij} \): binary response by informant \( i \) to item \( j \)  
+  - $D_i$: competence of informant $i$, probability of giving correct answer  
+  - $Z_j$: consensus answer (latent ground truth) for item $j$  
+  - $X_{ij}$: binary response by informant $i$ to item $j$  
 - The response probability is defined as:  
   \[  
   p_{ij} = Z_j \cdot D_i + (1 - Z_j)(1 - D_i)  
   \]  
 - Model components:  
-  - \( D_i \sim \text{Uniform}(0.5, 1) \)    
-  - \( Z_j \sim \text{Bernoulli}(0.5) \)    
-  - \( X_{ij} \sim \text{Bernoulli}(p_{ij}) \)
+  - $D_i \sim \text{Uniform}(0.5, 1)$    
+  - $Z_j \sim \text{Bernoulli}(0.5)$    
+  - $X_{ij} \sim \text{Bernoulli}(p_{ij})$
 
 ### Justification for Priors
 
-- **Competence \( D_i \)**:  
+- **Competence $D_i$**:  
   - A uniform prior from 0.5 to 1 reflects minimal assumptions:  
     - 0.5 is the expected accuracy from random guessing  
     - 1.0 represents perfect knowledge  
   - This range ensures that informants are at least somewhat knowledgeable
 
-- **Consensus answer \( Z_j \)**:  
+- **Consensus answer $Z_j$**:  
   - Bernoulli(0.5) prior assumes complete uncertainty about the truth  
   - It equally allows the answer to be either 0 or 1 before seeing data
 
@@ -53,7 +53,7 @@ The core idea behind CCT is that the more someone knows about the cultural conse
 
 - Inference is performed using PyMC's `pm.sample()`:  
   - `draws=2000`, `chains=4`, `tune=1000`, `target_accept=0.95`  
-- NUTS sampler is used for continuous \( D \), and BinaryGibbsMetropolis for discrete \( Z \)  
+- NUTS sampler is used for continuous $D$, and BinaryGibbsMetropolis for discrete $Z$  
 - All chains converged (`R_hat = 1.0`)  
 - No divergent transitions  
 - Effective sample sizes (ESS) are large, indicating robust sampling
