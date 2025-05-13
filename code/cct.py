@@ -1,5 +1,7 @@
 # cct.py
 
+# ChatGPT (model: Cognitive Model & ChatGPT o4-mini-high) was used as a reference throughout the development process, assisting in clarifying assignment requirements, shaping the initial code structure and generation, and supporting code debugging.
+
 import pandas as pd
 import numpy as np
 import pymc as pm
