@@ -87,6 +87,10 @@ Informant 9: 0.563
 Informant 10: 0.567
 ```
 
+**Posterior Distribution of Informant Competence (D)**
+
+![Competence Posterior](../cct-midterm/competence_posterior.png)
+
 **Conclusion**:
 
 * All informants are above guessing level (0.5), showing real knowledge
@@ -97,18 +101,24 @@ Informant 10: 0.567
 
 ### Consensus Answer Estimation (Zj)
 
-Posterior mean probabilities for each question:
+Posterior mean probabilities for each question (probability value varies across each run):
 
 ```text
 [0.011, 0.841, 0.990, 0.015, 0.546, 0.938, 0.998, 0.923, 0.977, 0.928,
  0.985, 0.009, 0.258, 0.912, 0.253, 0.020, 0.008, 0.059, 0.032, 0.997]
 ```
 
-Consensus answer key (thresholded at 0.5):
+The most likely consensus answer key was obtained by rounding the posterior mean probabilities for each $Z_j$. The Consensus answer key (thresholded at 0.5) is:
 
 ```text
 [0 1 1 0 1 1 1 1 1 1 1 0 0 1 0 0 0 0 0 1]
 ```
+
+Each item is 0 or 1, representing the most likely consensus answer for that question.
+
+**Posterior Distribution of Consensus Answers (Z)**
+
+![Consensus Posterior](../cct-midterm/consensus_posterior.png)
 
 **Conclusion**:
 
@@ -120,19 +130,27 @@ Consensus answer key (thresholded at 0.5):
 
 ### Comparison with Majority Vote
 
-Majority vote answers:
+To establish a baseline, I computed the naive consensus answer key by taking the majority vote for each question — i.e., if more than half of the informants answered "1", the naive consensus is set to 1, and 0 otherwise.
+
+The majority vote vector was:
 
 ```text
 [0 0 1 0 1 0 1 0 1 0 1 0 0 0 0 0 0 0 0 1]
 ```
 
-Model-based consensus:
+In contrast, the CCT model-based consensus key was:
 
 ```text
 [0 1 1 0 1 1 1 1 1 1 1 0 0 1 0 0 0 0 0 1]
 ```
 
 **Agreement rate = 0.75**
+
+**Why do differences occur?**
+
+The Cultural Consensus Theory model incorporates each informant's competence estimate when inferring the consensus. Therefore, answers from more competent informants have greater influence than those from less competent ones.
+
+Naive aggregation treats all informants equally, which can bias the result if some informants consistently perform poorly. The CCT model corrects for this by effectively weighting answers based on inferred knowledge level, leading to more robust consensus estimates, especially on questions where the group is divided.
 
 **Conclusion**:
 
@@ -153,7 +171,13 @@ cct-midterm/
 │   └── cct.py               # Main model and analysis script
 ├── data/
 │   └── plant_knowledge.csv  # Raw data
+│
+├── competence_posterior.png # Output: posterior distributions for informant competence
+├── consensus_posterior.png  # Output: posterior distributions for consensus answers
+│
 ├── README.md                # This report
+
+
 ```
 
 ---

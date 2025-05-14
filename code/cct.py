@@ -122,6 +122,7 @@ def analyze_competence(trace):
 
     # Plot posterior distributions
     az.plot_posterior(trace, var_names=["D"])
+    plt.savefig("competence_posterior.png")
     plt.show()
 
     # Find most and least competent
@@ -150,6 +151,7 @@ def analyze_consensus(trace):
 
     # Plot posterior distributions
     az.plot_posterior(trace, var_names=["Z"])
+    plt.savefig("consensus_posterior.png")
     plt.show()
 
 
