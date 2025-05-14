@@ -89,7 +89,7 @@ Informant 10: 0.567
 
 **Posterior Distribution of Informant Competence (D)**
 
-![Competence Posterior](../cct-midterm/competence_posterior.png)
+![Competence Posterior](competence_posterior.png)
 
 **Conclusion**:
 
@@ -118,7 +118,7 @@ Each item is 0 or 1, representing the most likely consensus answer for that ques
 
 **Posterior Distribution of Consensus Answers (Z)**
 
-![Consensus Posterior](../cct-midterm/consensus_posterior.png)
+![Consensus Posterior](consensus_posterior.png)
 
 **Conclusion**:
 
@@ -176,8 +176,6 @@ cct-midterm/
 ├── consensus_posterior.png  # Output: posterior distributions for consensus answers
 │
 ├── README.md                # This report
-
-
 ```
 
 ---
